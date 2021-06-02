@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.anggarad.dev.bangunganku.data.UserPreferences
 import com.anggarad.dev.bangunganku.data.network.RemoteDataSource
 import com.anggarad.dev.bangunganku.data.repository.BaseRepository
 import com.anggarad.dev.bangunganku.viewmodel.ViewModelFactory
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 
 abstract class BaseFragment<VM : ViewModel, Binding : ViewBinding, Repos : BaseRepository> :
@@ -31,6 +34,9 @@ abstract class BaseFragment<VM : ViewModel, Binding : ViewBinding, Repos : BaseR
         binding = getFragmentBinding(inflater, container)
         val factory = ViewModelFactory(getFragmentRepos())
         viewModel = ViewModelProvider(this, factory).get(getViewModel())
+
+        lifecycleScope.launch { userPref.accessToken.first() }
+
         return binding.root
 
     }

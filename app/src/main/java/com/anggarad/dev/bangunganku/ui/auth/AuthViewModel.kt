@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anggarad.dev.bangunganku.data.network.Resource
-import com.anggarad.dev.bangunganku.data.repository.UserRepository
+import com.anggarad.dev.bangunganku.data.repository.AuthRepository
 import com.anggarad.dev.bangunganku.data.source.remote.response.LoginResponse
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class AuthViewModel(private val repos: UserRepository) : ViewModel() {
+class AuthViewModel(private val repos: AuthRepository) : ViewModel() {
 
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
     val loginResponse: LiveData<Resource<LoginResponse>> = _loginResponse
@@ -20,6 +20,11 @@ class AuthViewModel(private val repos: UserRepository) : ViewModel() {
         return viewModelScope.launch {
             _loginResponse.value = repos.userLogin(email, password)
         }
+    }
+
+    fun saveAccessToken(token: String) = viewModelScope.launch {
+        repos.saveAccessToken(token)
+
     }
     //fun onLoginButtonClick(view: View){
 //        authListener?.onStarted()

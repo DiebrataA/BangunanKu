@@ -1,13 +1,19 @@
 package com.anggarad.dev.bangunganku.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.anggarad.dev.bangunganku.data.repository.UserRepository
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val repository: UserRepository
+) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+//    private val _user: MutableLiveData<Resource<UserResponse>> = MutableLiveData()
+//    val user: LiveData<Resource<UserResponse>>
+//    get() = _user
+//
+//    fun getUser() = viewModelScope.launch {
+//        _user.value = Resource.Loading
+//        _user.value = repository.getUser()
+//    }
+
 }

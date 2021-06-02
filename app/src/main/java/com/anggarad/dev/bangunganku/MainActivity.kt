@@ -1,12 +1,12 @@
 package com.anggarad.dev.bangunganku
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.asLiveData
 import com.anggarad.dev.bangunganku.data.UserPreferences
 import com.anggarad.dev.bangunganku.ui.auth.AuthActivity
+import com.anggarad.dev.bangunganku.ui.home.HomeActivity
+import com.anggarad.dev.bangunganku.ui.startNewActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,9 +16,8 @@ class MainActivity : AppCompatActivity() {
         val userPref = UserPreferences(this)
 
         userPref.accessToken.asLiveData().observe(this, {
-            Toast.makeText(this, it ?: "Token null", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, AuthActivity::class.java))
-//            startActivity(Intent(this, MapsActivity::class.java))
+            val activity = if (it == null) AuthActivity::class.java else HomeActivity::class.java
+            startNewActivity(activity)
         })
 
 //        startActivity(Intent(this, AuthActivity::class.java))
