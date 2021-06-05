@@ -103,14 +103,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
     }
 
-    private fun reverseGeocode(lastLocation: Location) {
-        var geocoder = Geocoder(this, Locale.getDefault())
-        var addresses = geocoder.getFromLocation(lastLocation.latitude, lastLocation.longitude, 2)
-        var address = addresses[0]
-
-        binding.currentLocation.text = "${address.getAddressLine(0)}, ${address.locality}"
-
-    }
+//    private fun reverseGeocode(lastLocation: Location) {
+//        var geocoder = Geocoder(this, Locale.getDefault())
+//        var addresses = geocoder.getFromLocation(lastLocation.latitude, lastLocation.longitude, 2)
+//        var address = addresses[0]
+//
+//        binding.currentLocation.text = "${address.getAddressLine(0)}, ${address.locality}"
+//
+//    }
 
     private fun placeMarker(currentLatLng: LatLng, location: Location) {
         val markerOptions = MarkerOptions().position(currentLatLng)

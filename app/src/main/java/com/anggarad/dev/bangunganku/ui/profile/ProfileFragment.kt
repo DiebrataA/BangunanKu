@@ -4,17 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.anggarad.dev.bangunganku.data.network.Resource
 import com.anggarad.dev.bangunganku.data.network.UserApi
 import com.anggarad.dev.bangunganku.data.repository.UserRepository
-import com.anggarad.dev.bangunganku.data.source.remote.response.UserResponse
+import com.anggarad.dev.bangunganku.data.source.remote.response.DataUser
 import com.anggarad.dev.bangunganku.databinding.FragmentProfileBinding
+import com.anggarad.dev.bangunganku.ui.auth.AuthActivity
 import com.anggarad.dev.bangunganku.ui.base.BaseFragment
+import com.anggarad.dev.bangunganku.ui.startNewActivity
 import com.anggarad.dev.bangunganku.ui.visible
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
-class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding, UserRepository>() {
+class ProfileFragment() : BaseFragment<ProfileViewModel, FragmentProfileBinding, UserRepository>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -23,27 +26,37 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding, U
 
         viewModel.getUser()
 
-        viewModel.user.observe(viewLifecycleOwner, {
+        viewModel.dataUser.observe(viewLifecycleOwner, {
             when (it) {
                 is Resource.Success -> {
                     binding.progressBar.visible(false)
-                    updateUI(it.value)
+                    updateUI(it.value.data)
                 }
                 is Resource.Loading -> {
                     binding.progressBar.visible(true)
                 }
+                is Resource.Failure -> {
+                    Toast.makeText(requireContext(), "Gagal memuat data", Toast.LENGTH_SHORT).show()
+                }
             }
         })
-    }
 
-    private fun updateUI(user: UserResponse) {
-        with(binding) {
-            tvUsersName.text = user.fullname
-            tvCity.text = user.city
+        binding.logoutButton.setOnClickListener {
+            runBlocking {
+                userPref.logout()
+            }
+            requireActivity().startNewActivity(AuthActivity::class.java)
+            Toast.makeText(requireContext(), "Logged Out", Toast.LENGTH_SHORT).show()
         }
     }
 
-    //    private lateinit var profileViewModel: ProfileViewModel
+    private fun updateUI(dataUser: DataUser) {
+        with(binding) {
+            tvUsersName.text = dataUser.fullname
+            tvCity.text = dataUser.city
+        }
+    }
+
     override fun getViewModel(): Class<ProfileViewModel> {
         return ProfileViewModel::class.java
     }

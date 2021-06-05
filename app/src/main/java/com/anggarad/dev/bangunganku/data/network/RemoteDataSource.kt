@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RemoteDataSource {
     companion object {
         private const val BASE_URL = "http://34.101.207.154/"
-
+    }
         fun <Api> getApiService(
             api: Class<Api>,
             accessToken: String? = null
@@ -19,7 +19,7 @@ class RemoteDataSource {
             val client = OkHttpClient.Builder()
                 .addInterceptor { chain ->
                     chain.proceed(chain.request().newBuilder().also {
-                        it.addHeader("Authorization", "Bearer $accessToken")
+                        it.addHeader("token", "$accessToken")
                     }.build())
                 }
                 .also {
@@ -37,4 +37,3 @@ class RemoteDataSource {
             return retrofit.create(api)
         }
     }
-}

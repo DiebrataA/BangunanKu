@@ -18,23 +18,13 @@ class AuthViewModel(private val repos: AuthRepository) : ViewModel() {
 
     fun login(email: String, password: String): Job {
         return viewModelScope.launch {
+            _loginResponse.value = Resource.Loading
             _loginResponse.value = repos.userLogin(email, password)
         }
     }
 
-    fun saveAccessToken(token: String) = viewModelScope.launch {
-        repos.saveAccessToken(token)
-
+    suspend fun saveCredentials(token: String) {
+        repos.saveCredentials(token)
     }
-    //fun onLoginButtonClick(view: View){
-//        authListener?.onStarted()
-//        if(email.isNullOrEmpty() || password.isNullOrEmpty()){
-//            authListener?.onFailure("Invalid email or password!")
-//            return
-//        }
-//
-//        val loginResponse = UserRepository().userLogin(email!!, password!!)
-//        authListener?.onSuccess()
-//    }
 
 }

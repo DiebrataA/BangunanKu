@@ -23,7 +23,7 @@ abstract class BaseFragment<VM : ViewModel, Binding : ViewBinding, Repos : BaseR
     protected lateinit var userPref: UserPreferences
     protected lateinit var binding: Binding
     protected lateinit var viewModel: VM
-    protected val remoteDataSource = RemoteDataSource
+    protected val remoteDataSource = RemoteDataSource()
 
     override fun onCreateView(
         inflater: LayoutInflater,

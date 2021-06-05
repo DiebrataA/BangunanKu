@@ -7,15 +7,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
 import com.anggarad.dev.bangunganku.data.network.ApiService
 import com.anggarad.dev.bangunganku.data.network.Resource
 import com.anggarad.dev.bangunganku.data.repository.AuthRepository
 import com.anggarad.dev.bangunganku.databinding.FragmentLoginBinding
 import com.anggarad.dev.bangunganku.ui.base.BaseFragment
 import com.anggarad.dev.bangunganku.ui.enable
+import com.anggarad.dev.bangunganku.ui.handleApiError
 import com.anggarad.dev.bangunganku.ui.home.HomeActivity
 import com.anggarad.dev.bangunganku.ui.startNewActivity
 import com.anggarad.dev.bangunganku.ui.visible
+import kotlinx.coroutines.launch
 
 class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>() {
 
@@ -26,17 +29,25 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         binding.loginButton.enable(false)
 
         viewModel.loginResponse.observe(viewLifecycleOwner, {
-            binding.progressBar.visible(false)
+            binding.progressBar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
-
-                    viewModel.saveAccessToken(it.value.accessToken.toString())
-                    requireActivity().startNewActivity(HomeActivity::class.java)
-
+                    if (!it.value.response) {
+                        Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_SHORT).show()
+                    } else {
+                        lifecycleScope.launch {
+                            viewModel.saveCredentials(it.value.accessToken!!)
+                            Toast.makeText(
+                                requireContext(),
+                                "Welcome ${it.value.data.fullname}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            requireActivity().startNewActivity(HomeActivity::class.java)
+                        }
+                    }
                 }
-                is Resource.Failure -> {
-                    Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_SHORT).show()
-                }
+
+                is Resource.Failure -> handleApiError(it)
             }
         })
 
@@ -48,8 +59,7 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         binding.loginButton.setOnClickListener {
             val email = binding.editTextTextEmailAddress.text.toString().trim()
             val password = binding.editTextTextPassword.text.toString().trim()
-            binding.progressBar.visible(true)
-            viewModel.login(email.toString(), password.toString())
+            viewModel.login(email, password)
 
         }
     }

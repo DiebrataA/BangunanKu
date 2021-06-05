@@ -13,12 +13,11 @@ class ProfileViewModel(
     private val repository: UserRepository
 ) : ViewModel() {
 
-    private val _user: MutableLiveData<Resource<UserResponse>> = MutableLiveData()
-    val user: LiveData<Resource<UserResponse>>
-        get() = _user
+    private val _dataUser: MutableLiveData<Resource<UserResponse>> = MutableLiveData()
+    val dataUser: LiveData<Resource<UserResponse>>
+        get() = _dataUser
 
     fun getUser() = viewModelScope.launch {
-        _user.value = repository.getUser()
-
+        _dataUser.value = repository.getUser()
     }
 }

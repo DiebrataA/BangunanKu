@@ -14,10 +14,4 @@ interface ApiService {
         @Field("password") password: String
     ): LoginResponse
 
-//    companion object {
-//        operator fun invoke() : ApiService{
-//            return Retrofit.Builder()
-//                .baseUrl()
-//        }
-//    }
 }

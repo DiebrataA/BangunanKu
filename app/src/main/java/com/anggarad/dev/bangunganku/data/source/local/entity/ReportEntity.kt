@@ -1,37 +1,22 @@
 package com.anggarad.dev.bangunganku.data.source.local.entity
 
-import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "reportentities")
 data class ReportEntity(
-    @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "reportId")
-    var reportId: Int,
 
-    @ColumnInfo(name = "fullname")
-    var fullname: String,
+    var reportId: Int? = null,
 
-    @ColumnInfo(name = "urlImage")
-    var urlImage: String,
+    var fullname: String? = null,
 
-    @ColumnInfo(name = "buildType")
-    var buildType: String,
+    var urlImage: String? = null,
 
-    @ColumnInfo(name = "address")
-    var address: String,
+    var buildType: String? = null,
 
-    @ColumnInfo(name = "coordinate")
-    var coordinate: String,
+    var address: String? = null,
 
-    @ColumnInfo(name = "damageLvl")
-    var damageLvl: String,
+    var coordinate: String? = null,
 
-    @ColumnInfo(name = "dateTime")
-    var dateTime: String,
+    var damageLvl: String? = null,
+
+    var dateTime: String? = null,
 
 
     )
