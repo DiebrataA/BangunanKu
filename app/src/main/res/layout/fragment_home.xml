@@ -34,6 +34,7 @@
             app:layout_constraintStart_toEndOf="@+id/icon_loc"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_menu"
             android:layout_width="match_parent"

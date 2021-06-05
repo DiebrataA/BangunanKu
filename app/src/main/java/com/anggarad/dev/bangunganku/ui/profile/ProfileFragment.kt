@@ -51,8 +51,9 @@ class ProfileFragment() : BaseFragment<ProfileViewModel, FragmentProfileBinding,
     }
 
     private fun updateUI(dataUser: DataUser) {
+        val name = runBlocking { userPref.getUserName.first() }
         with(binding) {
-            tvUsersName.text = dataUser.fullname
+            tvUsersName.text = name
             tvCity.text = dataUser.city
         }
     }

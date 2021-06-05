@@ -15,6 +15,7 @@ class UserPreferences(context: Context) {
 
     companion object {
         private val KEY_AUTH = preferencesKey<String>("key_auth")
+        private val USER_NAME = preferencesKey<String>("user_name")
     }
 
     val accessToken: Flow<String?>
@@ -24,9 +25,17 @@ class UserPreferences(context: Context) {
             }
         }
 
-    suspend fun saveUserCredentials(accessToken: String) {
+    val getUserName: Flow<String?>
+        get() {
+            return dataStore.data.map { preferences ->
+                preferences[USER_NAME]
+            }
+        }
+
+    suspend fun saveUserCredentials(accessToken: String, userName: String) {
         dataStore.edit { preferences ->
             preferences[KEY_AUTH] = accessToken
+            preferences[USER_NAME] = userName
         }
     }
 

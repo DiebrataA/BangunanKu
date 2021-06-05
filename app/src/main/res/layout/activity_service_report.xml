@@ -9,14 +9,16 @@
 
     <TextView
         android:id="@+id/tv_bulding_type_content"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="35dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/building_type_text"
         android:textColor="?attr/colorOnPrimary"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_building_type" />
 
@@ -33,14 +35,16 @@
 
     <TextView
         android:id="@+id/tv_address_report"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="35dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/address_title"
         android:textColor="?attr/colorOnPrimary"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_address_title" />
 
@@ -138,14 +142,16 @@
 
     <TextView
         android:id="@+id/tv_name_report"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="35dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/reporter_name_default"
         android:textColor="?attr/colorOnPrimary"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_report_title" />
 

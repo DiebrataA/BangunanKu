@@ -8,6 +8,8 @@ import com.anggarad.dev.bangunganku.data.network.Resource
 import com.anggarad.dev.bangunganku.data.repository.UserRepository
 import com.anggarad.dev.bangunganku.data.source.remote.response.ReportResponse
 import com.anggarad.dev.bangunganku.data.source.remote.response.UserResponse
+import com.google.android.gms.maps.model.LatLng
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ServiceReportViewModel(
@@ -24,18 +26,19 @@ class ServiceReportViewModel(
         _dataUser.value = repository.getUser()
     }
 
-//     fun postReport(
-//        name: String,
-//        address: String,
-//        coordinate: LatLng,
-//        damageLvl: String,
-//        buildingType: String,
-//        photo: String) : Job
-//    {
-//        return viewModelScope.launch {
-//            _reportResponse.value = Resource.Loading
-//            _reportResponse.value = repository.postReport(name, address,coordinate, damageLvl, buildingType, photo)
-//        }
-//
-//    }
+    fun postReport(
+        name: String,
+        address: String,
+        coordinate: LatLng,
+        damageLvl: String,
+        buildingType: String,
+        photo: String
+    ): Job {
+        return viewModelScope.launch {
+            _reportResponse.value = Resource.Loading
+            _reportResponse.value =
+                repository.postReport(name, address, coordinate, damageLvl, buildingType, photo)
+        }
+
+    }
 }

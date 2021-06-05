@@ -23,8 +23,8 @@ class AuthViewModel(private val repos: AuthRepository) : ViewModel() {
         }
     }
 
-    suspend fun saveCredentials(token: String) {
-        repos.saveCredentials(token)
+    suspend fun saveCredentials(token: String, userName: String) {
+        repos.saveCredentials(token, userName)
     }
 
 }

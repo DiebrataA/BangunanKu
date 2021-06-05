@@ -36,7 +36,10 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
                         Toast.makeText(requireContext(), "Login Failed", Toast.LENGTH_SHORT).show()
                     } else {
                         lifecycleScope.launch {
-                            viewModel.saveCredentials(it.value.accessToken!!)
+                            viewModel.saveCredentials(
+                                it.value.accessToken!!,
+                                it.value.data.fullname!!
+                            )
                             Toast.makeText(
                                 requireContext(),
                                 "Welcome ${it.value.data.fullname}",

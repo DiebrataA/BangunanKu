@@ -34,7 +34,9 @@
             android:value="@string/google_maps_key" /> <!-- <activity -->
         <!-- android:name=".MapsActivity" -->
         <!-- android:label="@string/title_activity_maps"></activity> -->
-        <activity android:name=".ui.service.building.ServiceReportActivity" />
+        <activity
+            android:name=".ui.service.building.ServiceReportActivity"
+            android:parentActivityName=".ui.home.HomeActivity" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:label="@string/title_home" />
