@@ -14,6 +14,4 @@ teknologi yang digunakan:
 • Recycler View untuk menyimpan riwayat laporan.
 • Perancangan UI menggunakan constraint layout.
 
-![alt text](https://github.com/DiebrataA/BangunanKu/edit/master/screens.jpg)
-
-<img src=https://github.com/DiebrataA/BangunanKu/edit/master/screens.jpg height=auto width=auto />
+![alt text](/screens.jpg)
