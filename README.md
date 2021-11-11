@@ -15,3 +15,5 @@ teknologi yang digunakan:
 • Perancangan UI menggunakan constraint layout.
 
 ![alt text](https://github.com/DiebrataA/BangunanKu/edit/master/screens.jpg)
+
+<img src=https://github.com/DiebrataA/BangunanKu/edit/master/screens.jpg height=auto width=auto />
